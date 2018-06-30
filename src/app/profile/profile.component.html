@@ -1,0 +1,105 @@
+<div class="border border-success center20">
+  <h1> PROFILE </h1>
+<div class="panel panel-info inbxTxt">
+     <div class="panel-body" >
+       <div class="container-fluid">
+         <table class="table table-bordered"  style="overflow:auto;margin:20px">
+           <thead>
+             <tr>
+               <th>Name</th>
+               <th>Email</th>
+               <th>Mobile</th>
+               <th>Technology</th>
+               <th>Specialization</th>
+               <th>Expired</th>
+               <th>VisaType</th>
+               <th>Location</th>
+               <th>BillRate</th>
+               <th>Availability</th>
+               <th>Upload Profile</th>
+               <th>Client</th>
+               <th>employerName</th>
+               <th>employerEmail</th>
+               <th>employertext</th>
+               <th>comments</th>
+             </tr>
+           </thead>
+           <tbody >
+             <tr *ngFor="let data of profile;let i = index; let lastEl = last; let firstEl = first">
+               <td>
+                 <input class="discount" type="text" [readonly]='formEditable'  [(ngModel)]='profile[i].resourceName'/>
+               </td>
+               <td>
+                 <input class="discount" type="text" [readonly]='formEditable'  [(ngModel)]='profile[i].resourceEmail'/>
+               </td>
+               <td>
+                 <input class="discount" type="text"  [readonly]='formEditable'  [(ngModel)]='profile[i].resourceNumber'/>
+               </td>
+               <td>
+                 <!-- <input class="discount" type="text"  [(ngModel)]='profile[i].resourceTechnology'/> -->
+                 <select [(ngModel)]='profile[i].resourceTechnology'>
+                     <option *ngFor="let item of tech" value={{item}}>
+                         {{item}}
+                     </option>
+                 </select>
+               </td>
+               <td>
+                 <!-- <input class="discount" type="text"  [(ngModel)]='profile[i].resourceSpec'/> -->
+                 <select [(ngModel)]='profile[i].resourceSpec'>
+                     <option *ngFor="let item of tech" value={{item}}>
+                         {{item}}
+                     </option>
+                 </select>
+               </td>
+               <td>
+                 <input class="discount" type="text" [readonly]='formEditable' [(ngModel)]='profile[i].resourceExp'/>
+               </td>
+               <td>
+                 <input class="discount" type="text" [readonly]='formEditable' [(ngModel)]='profile[i].resourceVisaType'/>
+               </td>
+               <td>
+                 <input class="discount" type="text" [readonly]='formEditable'  [(ngModel)]='profile[i].resurceLocation'/>
+               </td>
+               <td>
+                 <input class="discount" type="text" [readonly]='formEditable' [(ngModel)]='profile[i].resourceBillRate'/>
+               </td>
+               <td>
+                 <input class="discount" type="text" [readonly]='formEditable' [(ngModel)]='profile[i].resourceAvailability'/>
+               </td>
+               <td>
+                 <input type="file" (change)="fileChange($event)" [readonly]='formEditable' placeholder="Upload file" accept=".pdf,.doc,.docx">
+               </td>
+               <td>
+                 <input class="discount" type="text" [readonly]='formEditable' [(ngModel)]='profile[i].client'/>
+               </td>
+               <td>
+                 <input class="discount" type="text" [readonly]='formEditable' [(ngModel)]='profile[i].employerName'/>
+               </td>
+               <td>
+                 <input class="discount" type="text" [readonly]='formEditable' [(ngModel)]='profile[i].employerEmail'/>
+               </td>
+               <td>
+                 <input class="discount" type="text" [readonly]='formEditable' [(ngModel)]='profile[i].employerNumber'/>
+               </td>
+               <td>
+                 <input class="discount" type="text" [readonly]='formEditable' [(ngModel)]='profile[i].comments'/>
+               </td>
+               <td *ngIf='!firstEl'>
+                 <button type="button"  (click)='deleteRow(i)' class="btn btn-danger btn-sm">
+                   <span class="glyphicon glyphicon-minus"></span>
+                 </button>
+               </td>
+               <td *ngIf='lastEl'>
+                 <button type="button" (click)='addRow(i)' class="btn btn-success btn-sm">
+                   <span class="glyphicon glyphicon-plus"></span>
+                 </button>
+               </td>
+             </tr>
+           </tbody>
+         </table>
+       </div>
+        <hr>
+     </div>
+<button class="btn btn-primary btn-block"type="button" (click)='saveProfile(profile)' name="button">Save</button>
+</div>
+</div>

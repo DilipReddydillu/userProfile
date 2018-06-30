@@ -1,0 +1,43 @@
+<div class="container-fluid signIn center20">
+	<div [hidden]="submitted">
+		<h1>Log In</h1>
+		<div class="alert alert-danger alert-dismissible" *ngIf="loginFail">
+  <button type="button" class="close" data-dismiss="alert">&times;</button>
+  <strong>Invalid credentials!!</strong>
+</div>
+		<form (ngSubmit)="onSubmit(); signin.reset()" #signin="ngForm" class="login-form">
+			<div class="form-group">
+				<label for="name">Mobile</label>
+				<input type="text" class="form-control" id="mobile"
+               required
+               [(ngModel)]="mobileNumber" name="mobile"
+               #mobile="ngModel"/>
+				<div [hidden]="mobile.valid || mobile.pristine"
+             class="alert alert-danger">
+           Mobile Number is required
+        </div>
+			</div>
+			<div class="form-group">
+				<label for="name">Password</label>
+				<input type="password" class="form-control" id="password"
+               required
+               [(ngModel)]="passwordVal" name="password"
+               #password="ngModel" />
+				<div [hidden]="password.valid || password.pristine"
+             class="alert alert-danger">
+          Password is required
+        </div>
+			</div>
+			<div class=""row>
+			<button  type="submit" class="btn btn-success btn-md  col-sm-6" [disabled]="!signin.form.valid" >Log In</button>
+			<button  type="button" class="btn btn-primary btn-md col-sm-6"  routerLink="/register">Register</button>
+		</div>
+<!-- <div>
+			<label ><input #rememberVal type="checkbox" name="rememberMe" value="true" [(ngModel)]="rememberMe"> Remember Me</label>
+			<div class="pull-right forgot-password">
+				<label class='forgotPwd' data-toggle="modal" data-target="#myModal">Forgot your password?</label>
+			</div>
+</div> -->
+			</form>
+		</div>
+	</div>

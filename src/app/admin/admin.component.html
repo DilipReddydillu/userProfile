@@ -1,0 +1,11 @@
+<div class="container">
+<div class="row">
+  <div class="btn-group">
+    <button type="button" [routerLink]="['/admin/users']" class="btn btn-primary">Users</button>
+    <button type="button" [routerLink]="['/admin/profiles']" class="btn btn-primary">Profiles</button>
+  </div>
+</div>
+<div class="row" style="overflow:auto;margin:20px">
+<router-outlet></router-outlet>
+</div>
+</div>

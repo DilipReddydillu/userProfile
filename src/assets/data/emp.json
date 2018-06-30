@@ -1,0 +1,29 @@
+[
+      {
+        "id": 1,
+        "name": "Leanne Graham",
+        "username": "bretlee",
+        "email": "bretlee@april.biz"
+        },
+        {
+          "id": 2,
+          "name": "isabelle",
+          "username": "isabelle",
+          "email": "isabelle@april.biz"
+          },
+  
+          {
+            "id": 3,
+            "name": "John",
+            "username": "John",
+            "email": "John@april.biz"
+            },
+  
+            {
+              "id": 4,
+              "name": "Nina",
+              "username": "Nina",
+              "email": "Nina@april.biz"
+              }     
+  
+    ]
