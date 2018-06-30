@@ -1,9 +1,7 @@
-<div class="border border-success center20" >
-  <h1 class="center"> USERS </h1>
-<div class="panel panel-info inbxTxt">
-     <div class="panel-body">
-       <div class="container-fluid">
-         <table class="table table-bordered" style="overflow:auto;margin:20px">
+<div class="border border-success text-center pos">
+  <h1> USERS </h1>
+       <div class="container-fluid" style="overflow:auto;">
+         <table class="table table-bordered">
            <thead>
              <tr>
                <th>Name</th>
@@ -12,7 +10,7 @@
              </tr>
            </thead>
            <tbody>
-             <tr *ngFor="let data of users;>
+             <tr *ngFor="let data of users;">
                <td>
                  {{data.name}}
                </td>
@@ -27,6 +25,4 @@
          </table>
        </div>
         <hr>
-     </div>
-</div>
 </div>
