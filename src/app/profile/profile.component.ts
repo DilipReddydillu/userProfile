@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Router,ActivatedRoute} from '@angular/router';
 import { ServiceService } from '../service.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-profile',
@@ -9,6 +10,7 @@ import { ServiceService } from '../service.service';
 })
 export class ProfileComponent implements OnInit {
 profile = [{
+  jobId:'',
 resourceName:'',
 resourceEmail:'',
 resourceNumber:'',
@@ -27,21 +29,27 @@ comments:''
 }];
 fileData:File;
 tech = ['node','angular','java','spring'];
- urlVal:any;
- formEditable = false;
-
-  constructor(private _demoService: ServiceService,  private route: ActivatedRoute) { }
+urlVal:any;
+formEditable:boolean;
+userFilter: any = '';
+fileArrList:any = [];
+ curDate: number = Date.now();
+  constructor(private _demoService: ServiceService, private router: Router,  private routeActive: ActivatedRoute,private cookieService: CookieService) { }
 
   ngOnInit() {
-   this.urlVal = this.route.snapshot.url;
+   this.urlVal = this.routeActive.snapshot.url;
+   let userMobile = this.cookieService.get('mobile');
+   let role = this.cookieService.get('role');
+
     if (this.urlVal == "profiles") {
+      this.formEditable = false;
+    }else{
       this.formEditable = true;
     }
-
-  this._demoService.getProfile().subscribe(
+  this._demoService.getProfile(userMobile,role).subscribe(
       data => {
-        if (data != null ) {
-            let obj:any = data;
+        let obj:any = data;
+        if (obj != null && obj.length>0 ) {
             this.profile = obj;
         }else{
           alert('No  Data Found.')
@@ -54,7 +62,7 @@ tech = ['node','angular','java','spring'];
     console.log(this.profile);
   }
 
-  addRow = function(index){
+  addRow = function(){
     this.profile.push({});
   };
   deleteRow(index){
@@ -62,13 +70,12 @@ tech = ['node','angular','java','spring'];
   };
   saveProfile(data){
     console.log(data);
-    const fd = new FormData();
-     fd.append('profile', data);
-     fd.append('uploadFile',   this.fileData,   this.fileData.name);
-
-  this._demoService.saveProfile(fd).subscribe(
+    let userMobile = this.cookieService.get('mobile');
+    data = JSON.stringify(data);
+     console.log(data);
+  this._demoService.saveProfile(data,userMobile).subscribe(
     data => {
-alert('success');
+      alert('success');
     },
     error =>{
       alert('error')
@@ -76,12 +83,32 @@ alert('success');
   );
   };
 
-  fileChange(event) {
+  downloadProfile(mobile){
+    window.location.href = 'http://localhost:8080/api/downloadProfile/'+mobile;
+  }
+
+  fileChange(event, index) {
+    const fd = new FormData();
     let fileList: FileList = event.target.files;
-    console.log(fileList)
+    console.log(fileList+":index:"+index)
     if(fileList.length > 0) {
         this.fileData = fileList[0];
+         fd.append('index',index);
+         fd.append('file', this.fileData,this.fileData.name);
+         this._demoService.saveAttachment(fd).subscribe(
+             data => {
+               alert('Success ..Attachment saved')
+              },
+             error => {
+               alert('Falied ..Attachment save')
+             }
+           );
+
     }
-};
+}
+
+showHistory(mobile){
+  this.router.navigate(['profile-history', mobile]);
+}
 
 }

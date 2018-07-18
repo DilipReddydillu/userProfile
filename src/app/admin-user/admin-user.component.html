@@ -1,5 +1,8 @@
 <div class="border border-success text-center pos">
   <h1> USERS </h1>
+  <div class="">
+    Filter:<input type="text" class="example-full-width"  name="" [(ngModel)]="userFilter" value="Filter">
+ </div>
        <div class="container-fluid" style="overflow:auto;">
          <table class="table table-bordered">
            <thead>
@@ -7,12 +10,13 @@
                <th>Name</th>
                <th>Email</th>
                <th>Mobile</th>
+               <th>Blocked</th>
              </tr>
            </thead>
            <tbody>
-             <tr *ngFor="let data of users;">
+             <tr *ngFor="let data of users | filter : userFilter; let i = index;">
                <td>
-                 {{data.name}}
+                 {{data.userName}}
                </td>
                <td>
                  {{data.email}}
@@ -20,6 +24,13 @@
                <td>
                  {{data.mobile}}
                </td>
+               <td>
+                 <mat-slide-toggle
+                  [color]=''
+                  [checked]="data.blocked" [(ngModel)]="data.blocked"
+                  [disabled]="val" (change)='update(i)'>
+                </mat-slide-toggle>
+              </td>
              </tr>
            </tbody>
          </table>

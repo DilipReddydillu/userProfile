@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ServiceService } from '../service.service';
+//import {MyOwnCustomMaterialModule} from '../angularMaterial';
+//import 'hammerjs';
 
 @Component({
   selector: 'app-admin-user',
@@ -8,10 +10,10 @@ import { ServiceService } from '../service.service';
 })
 export class AdminUserComponent implements OnInit {
 users:any;
-constructor(private _demoService: ServiceService) { }
+constructor(private service: ServiceService) { }
 
   ngOnInit() {
-    this._demoService.getUsers().subscribe(
+    this.service.getUsers().subscribe(
         data => {
           if (data != null ) {
               let obj:any = data;
@@ -26,4 +28,23 @@ constructor(private _demoService: ServiceService) { }
       );
   }
 
+update(index){
+  console.log(this.users[index]);
+  if (index >= 0) {
+    let obj = this.users[index]
+    this.service.updateUser(obj).subscribe(
+      data => {
+        alert("user Blocked");
+      },
+      error => {
+        this.users[index].blocked = false;
+        alert("Error!!!");
+        console.log(this.users[index])
+      }
+    )
+  } else {
+    alert("Error!!");
+  }
+
+}
 }

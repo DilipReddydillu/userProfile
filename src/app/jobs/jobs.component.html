@@ -1,0 +1,41 @@
+<div class="container">
+  <button style="margin-left:50%" type="button" name="button" class="btn btn-primary btn-lg" routerLink="/profile">Add Profile</button>
+  <div class="">
+  <table class="table table-bordered">
+  <thead>
+    <tr>
+      <!-- <th>#</th> -->
+      <th>Job Id</th>
+      <th>Technology</th>
+      <th>Visa Type</th>
+      <th>Job Description</th>
+      <th>comments</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody >
+    <tr>
+      <td>
+        <input class="" type="text" [(ngModel)]='job.jobId'/>
+      </td>
+      <td>
+        <input class="" type="text" [(ngModel)]='job.technology'/>
+      </td>
+      <td>
+        <input class="" type="text" [(ngModel)]='job.visaType'/>
+      </td>
+      <td>
+        <input class="" type="text" [(ngModel)]='job.description'/>
+      </td>
+      <td>
+        <input class="" type="text" [(ngModel)]='job.comments'/>
+      </td>
+      <td>
+        <button type="button"  (click)='addJob()' class="btn btn-success btn-md">Apply
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>

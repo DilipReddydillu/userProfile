@@ -1,0 +1,81 @@
+<div class="border border-success text-center pos">
+  <h1> PROFILE-HISTROY </h1>
+  <div class="">
+  <span>Filter:<input type="text" class="example-full-width" [(ngModel)]="userFilter" value="Filter"></span>
+    <button type="button" class="btn btn-primary" (click)="backToProfiles()" name="button">BACK</button>
+ </div>
+ <div class="">
+ </div>
+       <div class="container-fluid" style="overflow:auto;">
+         <table class="table table-bordered">
+           <thead>
+             <tr>
+               <th>#</th>
+               <th>Name</th>
+               <th>Email</th>
+               <th>Technology</th>
+               <th>Specialization</th>
+               <th>Expired</th>
+               <th>VisaType</th>
+               <th>Location</th>
+               <th>BillRate</th>
+               <th>Availability</th>
+               <th>Date</th>
+               <th>Client</th>
+               <th>employerName</th>
+               <th>employerEmail</th>
+               <th>employerNumber</th>
+               <th>comments</th>
+             </tr>
+           </thead>
+           <tbody >
+             <tr *ngFor="let data of profile | filter : userFilter; let i = index; let lastEl = last; let firstEl = first">
+               <td>{{i+1}}</td>
+               <td>
+                 {{profile[i].resourceName}}
+               </td>
+               <td>
+                 {{profile[i].resourceEmail}}
+               </td>
+               <td>
+                 {{profile[i].resourceTechnology}}
+               </td>
+               <td>
+                 {{profile[i].resourceSpec}}
+               </td>
+               <td>
+                 {{profile[i].resourceExp}}
+               </td>
+               <td>
+                 {{profile[i].resourceVisaType}}
+               </td>
+               <td>
+                 {{profile[i].resourceLocation}}
+               </td>
+               <td>
+                 {{profile[i].resourceBillRate}}
+               </td>
+               <td>
+                 {{profile[i].resourceAvailability}}
+               </td>
+               <td>
+                 {{profile[i].client}}
+               </td>
+               <td>
+                 {{profile[i].employerName}}
+               </td>
+               <td>
+                 {{profile[i].employerEmail}}
+               </td>
+               <td>
+                 {{profile[i].employerNumber}}
+               </td>
+               <td>
+                 {{profile[i].comments}}
+               </td>
+             </tr>
+           </tbody>
+         </table>
+       </div>
+        <hr>
+</div>

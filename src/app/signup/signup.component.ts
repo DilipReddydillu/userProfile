@@ -23,9 +23,9 @@ export class SignupComponent {
     ngOnInit() {
   }
   onSubmit = function(){
-    let obj = {name:this.userName,email:this.emailId,number:this.mobileNumber,secQ:this.secQuestion,pswd:this.passwordVal, pswd2:this.passwordVal2}
+    let obj = {userName:this.userName,email:this.emailId,mobile:this.mobileNumber,secQ:this.secQuestion,password:this.passwordVal, pswd2:this.passwordVal2}
     console.log(obj);
-    if (obj.pswd == obj.pswd2) {
+    if (obj.password == obj.pswd2) {
       this._demoService.register(obj).subscribe(
         data => {
           this.router.navigate(['/', 'login']);
@@ -35,7 +35,7 @@ export class SignupComponent {
         }
       )
     }else{
-      alert("password missmatch");
+      alert("Password Miss Match");
     }
   }
 }

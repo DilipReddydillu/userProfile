@@ -1,3 +1,7 @@
+<div class="alert alert-danger alert-dismissible" *ngIf="userBlocked">
+  <button type="button" class="close" data-dismiss="alert">&times;</button>
+  <strong>Your Account Is Blocked. Please Contact ADMIN To UnBlock.</strong>
+</div>
 <div class="container-fluid signIn center20">
 	<div [hidden]="submitted">
 		<h1>Log In</h1>
