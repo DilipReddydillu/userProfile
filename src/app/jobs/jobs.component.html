@@ -1,10 +1,12 @@
-<div class="container">
-  <button style="margin-left:50%" type="button" name="button" class="btn btn-primary btn-lg" routerLink="/profile">Add Profile</button>
+<div class="container text-center">
+  <h1> JOB CREATION </h1>
+  <button  type="button" name="button" class="btn btn-success btn-lg" (click)="addJob()">Add Job</button>
+  <button  type="button" name="button" class="btn btn-info btn-lg" routerLink="/profile">Profile</button>
   <div class="">
   <table class="table table-bordered">
   <thead>
     <tr>
-      <!-- <th>#</th> -->
+      <th>#</th>
       <th>Job Id</th>
       <th>Technology</th>
       <th>Visa Type</th>
@@ -13,29 +15,37 @@
       <th></th>
     </tr>
   </thead>
-  <tbody >
-    <tr>
+  <tbody style="font-size: medium;">
+    <tr  *ngFor="let data of job; let i = index; let lastEl = last; let firstEl = first">
+      <td>{{i+1}}</td>
       <td>
-        <input class="" type="text" [(ngModel)]='job.jobId'/>
+        <input class="" type="text" [(ngModel)]='data.jobId'/>
       </td>
       <td>
-        <input class="" type="text" [(ngModel)]='job.technology'/>
+        <input class="" type="text" [(ngModel)]='data.resourceTechnology'/>
       </td>
       <td>
-        <input class="" type="text" [(ngModel)]='job.visaType'/>
+        <input class="" type="text" [(ngModel)]='data.resourceVisaType'/>
       </td>
       <td>
-        <input class="" type="text" [(ngModel)]='job.description'/>
+        <input class="" type="text" [(ngModel)]='data.description'/>
       </td>
       <td>
-        <input class="" type="text" [(ngModel)]='job.comments'/>
+        <input class="" type="text" [(ngModel)]='data.comments'/>
       </td>
       <td>
-        <button type="button"  (click)='addJob()' class="btn btn-success btn-md">Apply
+        <button type="button"  (click)='apply(data)' class="btn btn-success btn-md">Apply
+        </button>
+      </td>
+      <td >
+        <button type="button"  (click)='deleteRow(i)' class="btn btn-danger btn-sm">
+          <span class="glyphicon glyphicon-minus"></span>
         </button>
       </td>
     </tr>
   </tbody>
 </table>
 </div>
+<hr>
+<button  class="btn btn-primary btn-block"type="button" (click)='saveJobs(profile)' name="button">Save</button>
 </div>

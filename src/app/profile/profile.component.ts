@@ -38,6 +38,7 @@ fileArrList:any = [];
 
   ngOnInit() {
    this.urlVal = this.routeActive.snapshot.url;
+   let jobdata = this.routeActive.snapshot.queryParams;
    let userMobile = this.cookieService.get('mobile');
    let role = this.cookieService.get('role');
 
@@ -45,6 +46,10 @@ fileArrList:any = [];
       this.formEditable = false;
     }else{
       this.formEditable = true;
+    }
+    if(jobdata.jobId != null){
+      let job:any = jobdata;
+      this.profile.push(job);
     }
   this._demoService.getProfile(userMobile,role).subscribe(
       data => {

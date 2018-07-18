@@ -1,11 +1,11 @@
 <div class="" style="margin-left:50%">
-  <button type="button" name="button" class="btn btn-primary btn-lg" routerLink="/jobs">Add Job</button>
 </div>
 <div class="border border-success text-center pos textstyle">
   <h1> PROFILE </h1>
   <div class="">
     Filter:<input type="text" class="example-full-width" [(ngModel)]="userFilter" value="Filter">
     <button type="button" (click)='addRow()' class="btn btn-success btn-md">Add Profile</button>
+    <button type="button" name="button" class="btn btn-info btn-md" routerLink="/jobs">Create Job</button>
  </div>
        <div class="container-fluid" style="overflow:auto;">
          <table class="table table-bordered">
@@ -32,7 +32,7 @@
                <th>open/close</th>
              </tr>
            </thead>
-           <tbody >
+           <tbody style="font-size: medium;">
              <tr  *ngFor="let data of profile | filter : userFilter; let i = index; let lastEl = last; let firstEl = first">
                <td>{{i+1}}</td>
                <td class="userStyle">

@@ -91,7 +91,10 @@ export class ServiceService {
     let url = 'http://localhost:8080/api/addJob';
     return this.http.post(url,data);
   }
-
+  getJobs(){
+    let url = 'http://localhost:8080/api/getJobs';
+    return this.http.get(url);
+  }
   logout(){
 
   }

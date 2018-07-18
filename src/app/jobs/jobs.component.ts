@@ -11,16 +11,37 @@ import { CookieService } from 'ngx-cookie-service';
 export class JobsComponent implements OnInit {
 
   constructor(private service: ServiceService,private router: Router,  private route: ActivatedRoute,private cookieService: CookieService) { }
-  job = {};
+  job = [{}];
   ngOnInit() {
+    this.service.getJobs().subscribe(
+        data => {
+          let obj:any = data;
+          if (obj != null && obj.length>0 ) {
+              this.job = obj;
+          }else{
+            alert('No  Data Found.')
+          }
+        },
+        error => {
+          alert('Could Not Connect To Server! Try Again.')
+        }
+      );
   }
 
- addJob(){
+  apply(data){
+    this.router.navigate(['profile'],{ queryParams: data });
+  }
+  addJob(){
+    this.job.push({});
+  }
+  deleteRow(index){
+    this.job.splice(index,1);
+  };
+ saveJobs(){
    console.log(this.job)
    this.service.addJob(this.job).subscribe(
        data => {
-        alert('done')
-        this.router.navigate(['profile']);
+        alert('success')
        },
        error => {
          alert('Could Not Connect To Server! Try Again.')
