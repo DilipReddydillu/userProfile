@@ -29,7 +29,8 @@ export class JobsComponent implements OnInit {
   }
 
   apply(data){
-    this.router.navigate(['profile'],{ queryParams: data });
+    this.service.changeJob(data);
+    this.router.navigate(['profile']);
   }
   addJob(){
     this.job.push({});

@@ -33,6 +33,13 @@ export class ServiceService {
         this.role.next(userRole);
       }
 
+      private job = new BehaviorSubject<object>({});
+      jobData = this.job.asObservable();
+      changeJob(jobData: object) {
+         console.log('job:'+jobData);
+         this.job.next(jobData);
+       }
+
   register(data) {
       let body = JSON.stringify(data);
       console.log(data)

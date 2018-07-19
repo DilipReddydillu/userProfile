@@ -34,28 +34,30 @@ formEditable:boolean;
 userFilter: any = '';
 fileArrList:any = [];
  curDate: number = Date.now();
-  constructor(private _demoService: ServiceService, private router: Router,  private routeActive: ActivatedRoute,private cookieService: CookieService) { }
+ jobdata;
+  constructor(private service: ServiceService, private router: Router,  private routeActive: ActivatedRoute,private cookieService: CookieService) { }
 
   ngOnInit() {
    this.urlVal = this.routeActive.snapshot.url;
-   let jobdata = this.routeActive.snapshot.queryParams;
+   //let jobdata = this.routeActive.snapshot.queryParams;
    let userMobile = this.cookieService.get('mobile');
    let role = this.cookieService.get('role');
+   this.service.jobData.subscribe(job => this.jobdata = job)
 
     if (this.urlVal == "profiles") {
       this.formEditable = false;
     }else{
       this.formEditable = true;
     }
-    if(jobdata.jobId != null){
-      let job:any = jobdata;
-      this.profile.push(job);
-    }
-  this._demoService.getProfile(userMobile,role).subscribe(
+  this.service.getProfile(userMobile,role).subscribe(
       data => {
         let obj:any = data;
         if (obj != null && obj.length>0 ) {
             this.profile = obj;
+            if(this.jobdata.jobId != null){
+              this.profile.push(this.jobdata);
+              this.service.changeJob({});
+            }
         }else{
           alert('No  Data Found.')
         }
@@ -78,7 +80,7 @@ fileArrList:any = [];
     let userMobile = this.cookieService.get('mobile');
     data = JSON.stringify(data);
      console.log(data);
-  this._demoService.saveProfile(data,userMobile).subscribe(
+  this.service.saveProfile(data,userMobile).subscribe(
     data => {
       alert('success');
     },
@@ -100,7 +102,7 @@ fileArrList:any = [];
         this.fileData = fileList[0];
          fd.append('index',index);
          fd.append('file', this.fileData,this.fileData.name);
-         this._demoService.saveAttachment(fd).subscribe(
+         this.service.saveAttachment(fd).subscribe(
              data => {
                alert('Success ..Attachment saved')
               },
