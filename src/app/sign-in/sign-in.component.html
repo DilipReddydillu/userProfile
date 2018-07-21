@@ -32,16 +32,10 @@
           Password is required
         </div>
 			</div>
-			<div class=""row>
-			<button  type="submit" class="btn btn-success btn-md  col-sm-6" [disabled]="!signin.form.valid" >Log In</button>
-			<button  type="button" class="btn btn-primary btn-md col-sm-6"  routerLink="/register">Register</button>
+			<div class="row">
+			<button  type="submit" class="btn btn-success btn-md  col-md-5" [disabled]="!signin.form.valid" >Log In</button>
+			<button  type="button" class="btn btn-primary btn-md  col-md-5"  routerLink="/register">Register</button>
 		</div>
-<!-- <div>
-			<label ><input #rememberVal type="checkbox" name="rememberMe" value="true" [(ngModel)]="rememberMe"> Remember Me</label>
-			<div class="pull-right forgot-password">
-				<label class='forgotPwd' data-toggle="modal" data-target="#myModal">Forgot your password?</label>
-			</div>
-</div> -->
 			</form>
 		</div>
 	</div>

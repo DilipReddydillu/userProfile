@@ -12,6 +12,7 @@ export class JobsComponent implements OnInit {
 
   constructor(private service: ServiceService,private router: Router,  private route: ActivatedRoute,private cookieService: CookieService) { }
   job = [{}];
+  newJob={resourceTechnology:'',resourceVisaType:'',description:'',comments:''};
   ngOnInit() {
     this.service.getJobs().subscribe(
         data => {
@@ -30,19 +31,26 @@ export class JobsComponent implements OnInit {
 
   apply(data){
     this.service.changeJob(data);
-    this.router.navigate(['profile']);
+    this.router.navigate(['profiles']);
   }
-  addJob(){
-    this.job.push({});
-  }
-  deleteRow(index){
-    this.job.splice(index,1);
-  };
- saveJobs(){
-   console.log(this.job)
-   this.service.addJob(this.job).subscribe(
+  // addJob(){
+  //   this.job.push({});
+  // }
+  // deleteRow(index){
+  //   this.job.splice(index,1);
+  // };
+ newJobData(value){
+   console.log(value)
+   let dataArr = [value];
+   this.service.addJob(dataArr).subscribe(
        data => {
         alert('success')
+        let obj:any = data;
+        if (obj != null && obj.length>0 ) {
+            this.job = obj;
+        }else{
+          alert('Could Not Fetch Data.')
+        }
        },
        error => {
          alert('Could Not Connect To Server! Try Again.')

@@ -39,11 +39,11 @@ export class SignInComponent  {
                   if (data.role == 'ADMIN') {
                     this.cookieService.set('role','ADMIN');
                     this._demoService.changeRole('ADMIN');
-                    this.router.navigate(['/','admin']);
+                    this.router.navigate(['/','details']);
                   }else if(data.role == 'USER'){
                     this.cookieService.set('role','USER');
                     this._demoService.changeRole('USER');
-                    this.router.navigate(['/','profile']);
+                    this.router.navigate(['/','details']);
                   }
                 }
                 }else{

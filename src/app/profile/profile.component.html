@@ -2,15 +2,22 @@
 </div>
 <div class="border border-success text-center pos textstyle">
   <h1> PROFILE </h1>
+  <button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#addProfile">Add Profile</button>
+  <button type="button" name="button" class="btn btn-primary btn-lg" routerLink="/jobs">Create Job</button>
+  <hr>
   <div class="">
-    Filter:<input type="text" class="example-full-width" [(ngModel)]="userFilter" value="Filter">
-    <button type="button" (click)='addRow()' class="btn btn-success btn-md">Add Profile</button>
-    <button type="button" name="button" class="btn btn-info btn-md" routerLink="/jobs">Create Job</button>
- </div>
+    <div class="input-group input-group-lg">
+    <div class="input-group-prepend">
+      <span class="input-group-text" id="inputGroup-sizing-lg">Filter By Name</span>
+    </div>
+    <input type="text" class="form-control" [(ngModel)]="userFilter" placeholder="Filter Value">
+  </div>
+</div>
+<br>
        <div class="container-fluid" style="overflow:auto;">
          <table class="table table-bordered">
            <thead>
-             <tr>
+             <tr style="font-style: oblique;font-size: 20px;">
                <th>#</th>
                <th class="userStyle">Job Id</th>
                <th class="userStyle">Name</th>
@@ -36,91 +43,189 @@
              <tr  *ngFor="let data of profile | filter : userFilter; let i = index; let lastEl = last; let firstEl = first">
                <td>{{i+1}}</td>
                <td class="userStyle">
-                 <input class="" type="text"   (change)="profile[i].edit = true" [(ngModel)]='profile[i].jobId'/>
+                 <span class="number" *ngIf="profile[i].readOnly" (click)="showHistory(profile[i].jobId)">{{profile[i].jobId}}</span>
+                 <input class="" type="text" *ngIf="!profile[i].readOnly" [(ngModel)]='profile[i].jobId'/>
                </td>
                <td class="userStyle">
-                 <input class="" type="text"   (change)="profile[i].edit = true" [(ngModel)]='profile[i].resourceName'/>
+                 <input class="" type="text" [readonly]="profile[i].readOnly" [(ngModel)]='profile[i].resourceName'/>
                </td>
                <td class="userStyle">
-                 <input class="" type="text" (change)="profile[i].edit = true" [(ngModel)]='profile[i].resourceEmail'/>
+                 <input class="" type="text" [readonly]="profile[i].readOnly" [(ngModel)]='profile[i].resourceEmail'/>
                </td>
                <td class="userStyle">
-                 <input class="" type="text" *ngIf=" profile[i].resourceNumber == undefined || profile[i].resourceNumber.length != 10 " [(ngModel)]='profile[i].resourceNumber'/>
-                 <span class="number" *ngIf="profile[i].resourceNumber && profile[i].resourceNumber.length == 10" (click)="showHistory(profile[i].resourceNumber)">{{profile[i].resourceNumber}}</span>
+                 <span class="number" *ngIf="profile[i].readOnly" (click)="showHistory(profile[i].resourceNumber)">{{profile[i].resourceNumber}}</span>
+                 <input class="" type="text" *ngIf="!profile[i].readOnly" [(ngModel)]='profile[i].resourceNumber'/>
                </td>
                <td class="userStyle">
-                 <select (change)="profile[i].edit = true" [(ngModel)]='profile[i].resourceTechnology' >
+                 <select   [(ngModel)]='profile[i].resourceTechnology' >
                      <option *ngFor="let item of tech" value={{item}}>
                          {{item}}
                      </option>
                  </select>
                </td>
                <td class="userStyle">
-                 <select (change)="profile[i].edit = true" [(ngModel)]='profile[i].resourceSpec' >
+                 <select  [(ngModel)]='profile[i].resourceSpec' >
                      <option *ngFor="let item of tech" value={{item}}>
                          {{item}}
                      </option>
                  </select>
                </td>
                <td class="userStyle">
-                 <input class="" type="text"  (change)="profile[i].edit = true" [(ngModel)]='profile[i].resourceExp'/>
+                 <input class="" type="text"   [readonly]="profile[i].readOnly" [(ngModel)]='profile[i].resourceExp'/>
                </td>
                <td class="userStyle">
-                 <input class="" type="text" (change)="profile[i].edit = true" [(ngModel)]='profile[i].resourceVisaType'/>
+                 <input class="" type="text"  [readonly]="profile[i].readOnly" [(ngModel)]='profile[i].resourceVisaType'/>
                </td>
                <td class="userStyle">
-                 <input class="" type="text"  (change)="profile[i].edit = true" [(ngModel)]='profile[i].resourceLocation'/>
+                 <input class="" type="text"   [readonly]="profile[i].readOnly" [(ngModel)]='profile[i].resourceLocation'/>
                </td>
                <td class="userStyle">
-                 <input class="" type="text"  (change)="profile[i].edit = true" [(ngModel)]='profile[i].resourceBillRate'/>
+                 <input class="" type="text"   [readonly]="profile[i].readOnly" [(ngModel)]='profile[i].resourceBillRate'/>
                </td>
-               <!-- <td>
-                 <input class="" type="text"  (change)="profile[i].edit = true"
-                 [(ngModel)]='profile[i].resourceAvailability'/>
-               </td> -->
                <td class="userStyle">
                  <span class="number" placeholder="view file" (click)="downloadProfile(profile[i].resourceNumber)">{{profile[i].fileName}}</span>
                  <input type="file" (change)="fileChange($event,i)" placeholder="Upload file" accept=".pdf,.doc,.docx">
                </td>
                <td class="clientStyle">
-                 <input class="" type="text"  (change)="profile[i].edit = true" [(ngModel)]='profile[i].client'/>
+                 <input class="" type="text"   [readonly]="profile[i].readOnly" [(ngModel)]='profile[i].client'/>
                </td>
                <td class="clientStyle">
-                 <input class="" type="text"  (change)="profile[i].edit = true" [(ngModel)]='profile[i].clientLocation'/>
+                 <input class="" type="text"   [readonly]="profile[i].readOnly" [(ngModel)]='profile[i].clientLocation'/>
                </td>
                <td class="empStyle">
-                 <input class="" type="text"  (change)="profile[i].edit = true" [(ngModel)]='profile[i].employerName'/>
+                 <input class="" type="text"   [readonly]="profile[i].readOnly" [(ngModel)]='profile[i].employerName'/>
                </td>
                <td class="empStyle">
-                 <input class="" type="text"  (change)="profile[i].edit = true" [(ngModel)]='profile[i].employerEmail'/>
+                 <input class="" type="text"   [readonly]="profile[i].readOnly" [(ngModel)]='profile[i].employerEmail'/>
                </td>
                <td class="empStyle">
-                 <input class="" type="text"  (change)="profile[i].edit = true" [(ngModel)]='profile[i].employerNumber'/>
+                 <input class="" type="text"   [readonly]="profile[i].readOnly" [(ngModel)]='profile[i].employerNumber'/>
                </td>
                <td class="empStyle">
-                 <input class="" type="text"  (change)="profile[i].edit = true" [(ngModel)]='profile[i].comments'/>
+                 <input class="" type="text"   [readonly]="profile[i].readOnly" [(ngModel)]='profile[i].comments'/>
                </td>
                <td>
                  <mat-slide-toggle
                   [color]='green'
-                  [checked]="data.blocked" [(ngModel)]="profile[i].resourceAvailability"
+                  [checked]="data.blocked"  [(ngModel)]="profile[i].resourceAvailability"
                   [disabled]="val">
                 </mat-slide-toggle>
                </td>
-               <td >
-                 <button type="button"  (click)='deleteRow(i)' class="btn btn-danger btn-sm">
-                   <span class="glyphicon glyphicon-minus"></span>
-                 </button>
-               </td>
-               <!-- <td *ngIf="lastEl">
-                 <button type="button" (click)='addRow(i)' class="btn btn-success btn-sm">
-                   <span class="glyphicon glyphicon-plus"></span>
-                 </button>
-               </td> -->
+               <td *ngIf="profile[i].readOnly"><button type="button" name="button" (click)="profile[i].readOnly = false">Edit</button></td>
+               <td *ngIf="!profile[i].readOnly"><button type="button" name="button" (click)="profile[i].readOnly = true">Save</button></td>
              </tr>
            </tbody>
          </table>
        </div>
         <hr>
-<button  class="btn btn-primary btn-block"type="button" (click)='saveProfile(profile)' name="button">Save</button>
+<!-- <button  class="btn btn-primary btn-block"type="button" (click)='saveProfile(profile)' name="button">Save</button> -->
+</div>
+<!-- pop up -->
+<!-- Modal -->
+<div class="modal fade" id="addProfile" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="addProfileLabel" style="margin-left:560px">Add Profile</h2>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid" style="overflow:auto;">
+          <table class="table table-bordered">
+            <thead>
+              <tr style="font-style: oblique;font-size: 20px;">
+                <th class="userStyle">Job Id</th>
+                <th class="userStyle">Name</th>
+                <th class="userStyle">Email</th>
+                <th class="userStyle">Mobile</th>
+                <th class="userStyle">Technology</th>
+                <th class="userStyle">Specialization</th>
+                <th class="userStyle">Experience</th>
+                <th class="userStyle">Visa Type</th>
+                <th class="userStyle">Location</th>
+                <th class="userStyle">Bill Rate</th>
+                <th class="userStyle">Upload Profile</th>
+                <th class="clientStyle">Client</th>
+                <th class="clientStyle">Client Location</th>
+                <th class="empStyle">emp Name</th>
+                <th class="empStyle">emp Email</th>
+                <th class="empStyle">emp Number</th>
+                <th class="empStyle">comments</th>
+              </tr>
+            </thead>
+            <tbody style="font-size: medium;">
+              <tr>
+                <td class="userStyle">
+                  <input class="" type="text"  [(ngModel)]='newProfile.jobId'/>
+                </td>
+                <td class="userStyle">
+                  <input class="" type="text"    [(ngModel)]='newProfile.resourceName'/>
+                </td>
+                <td class="userStyle">
+                  <input class="" type="text"  [(ngModel)]='newProfile.resourceEmail'/>
+                </td>
+                <td class="userStyle">
+                  <input class="" type="text" [(ngModel)]='newProfile.resourceNumber'/>
+                </td>
+                <td class="userStyle">
+                  <select  [(ngModel)]='newProfile.resourceTechnology' >
+                      <option *ngFor="let item of tech" value={{item}}>
+                          {{item}}
+                      </option>
+                  </select>
+                </td>
+                <td class="userStyle">
+                  <select  [(ngModel)]='newProfile.resourceSpec' >
+                      <option *ngFor="let item of tech" value={{item}}>
+                          {{item}}
+                      </option>
+                  </select>
+                </td>
+                <td class="userStyle">
+                  <input class="" type="text"   [(ngModel)]='newProfile.resourceExp'/>
+                </td>
+                <td class="userStyle">
+                  <input class="" type="text"  [(ngModel)]='newProfile.resourceVisaType'/>
+                </td>
+                <td class="userStyle">
+                  <input class="" type="text"   [(ngModel)]='newProfile.resourceLocation'/>
+                </td>
+                <td class="userStyle">
+                  <input class="" type="text"   [(ngModel)]='newProfile.resourceBillRate'/>
+                </td>
+                <td class="userStyle">
+                  <span class="number" placeholder="view file" (click)="downloadProfile(newProfile.resourceNumber)">{{newProfile.fileName}}</span>
+                  <input type="file" (change)="fileChange($event,i)" placeholder="Upload file" accept=".pdf,.doc,.docx">
+                </td>
+                <td class="clientStyle">
+                  <input class="" type="text"   [(ngModel)]='newProfile.client'/>
+                </td>
+                <td class="clientStyle">
+                  <input class="" type="text"   [(ngModel)]='newProfile.clientLocation'/>
+                </td>
+                <td class="empStyle">
+                  <input class="" type="text"   [(ngModel)]='newProfile.employerName'/>
+                </td>
+                <td class="empStyle">
+                  <input class="" type="text"   [(ngModel)]='newProfile.employerEmail'/>
+                </td>
+                <td class="empStyle">
+                  <input class="" type="text"   [(ngModel)]='newProfile.employerNumber'/>
+                </td>
+                <td class="empStyle">
+                  <input class="" type="text"   [(ngModel)]='newProfile.comments'/>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)="saveProfile(newProfile)"  data-dismiss="modal">Submit</button>
+      </div>
+    </div>
+  </div>
 </div>

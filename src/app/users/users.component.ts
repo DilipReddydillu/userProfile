@@ -1,14 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ServiceService } from '../service.service';
-//import {MyOwnCustomMaterialModule} from '../angularMaterial';
-//import 'hammerjs';
 
 @Component({
-  selector: 'app-admin-user',
-  templateUrl: './admin-user.component.html',
-  styleUrls: ['./admin-user.component.css']
+  selector: 'app-users',
+  templateUrl: './users.component.html',
+  styleUrls: ['./users.component.css']
 })
-export class AdminUserComponent implements OnInit {
+export class UsersComponent implements OnInit {
 users:any;
 constructor(private service: ServiceService) { }
 

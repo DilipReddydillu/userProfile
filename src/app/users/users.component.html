@@ -1,8 +1,14 @@
 <div class="border border-success text-center pos textstyle">
   <h1> USERS </h1>
   <div class="">
-    Filter:<input type="text" class="example-full-width"  name="" [(ngModel)]="userFilter" value="Filter">
- </div>
+    <div class="input-group input-group-lg">
+    <div class="input-group-prepend">
+      <span class="input-group-text" id="inputGroup-sizing-lg">Filter By Name</span>
+    </div>
+    <input type="text" class="form-control" [(ngModel)]="userFilter" placeholder="Filter Value">
+  </div>
+</div>
+<br>
        <div class="container-fluid" style="overflow:auto;">
          <table class="table table-bordered">
            <thead>

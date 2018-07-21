@@ -1,9 +1,11 @@
 <div class="container text-center">
   <h1> JOB CREATION </h1>
-  <button  type="button" name="button" class="btn btn-success btn-lg" (click)="addJob()">Add Job</button>
-  <button  type="button" name="button" class="btn btn-info btn-lg" routerLink="/profile">Profile</button>
+  <!-- <button  type="button" name="button" class="btn btn-success btn-lg" (click)="addJob()">Add Job</button> -->
+  <button  type="button" name="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#exampleModal">Add Job</button>
+  <button  type="button" name="button" class="btn btn-primary btn-lg" routerLink="/profiles">View Profile</button>
+<hr>
   <div class="">
-  <table class="table table-bordered">
+  <table class="table table-success table-hover">
   <thead>
     <tr>
       <th>#</th>
@@ -37,15 +39,51 @@
         <button type="button"  (click)='apply(data)' class="btn btn-success btn-md">Apply
         </button>
       </td>
-      <td >
+      <!-- <td >
         <button type="button"  (click)='deleteRow(i)' class="btn btn-danger btn-sm">
           <span class="glyphicon glyphicon-minus"></span>
         </button>
-      </td>
+      </td> -->
     </tr>
   </tbody>
 </table>
 </div>
-<hr>
-<button  class="btn btn-primary btn-block"type="button" (click)='saveJobs(profile)' name="button">Save</button>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="exampleModalLabel" style="margin-left:160px">Add Job</h2>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+  <form>
+  <div class="form-group">
+    <label for="tech">Technology</label>
+    <input type="text" name="tech" class="form-control" [(ngModel)]="newJob.resourceTechnology" id="tech"   placeholder="Enter Technoology">
+  </div>
+  <div class="form-group">
+    <label for="visa">Visa Type</label>
+    <input type="text" name="visa" class="form-control" [(ngModel)]="newJob.resourceVisaType" id="visa"  placeholder="Enter VisaType">
+  </div>
+  <div class="form-group">
+    <label for="description">Job Description</label>
+    <input type="text" name="desc" class="form-control" [(ngModel)]="newJob.description" id="desc"  placeholder="Description">
+  </div>
+  <div class="form-group">
+    <label for="comments">Comments</label>
+    <input type="text" name="comments" class="form-control" [(ngModel)]="newJob.comments" id="comments" placeholder="Comments">
+  </div>
+</form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)="newJobData(newJob)"  data-dismiss="modal">Submit</button>
+      </div>
+    </div>
+  </div>
 </div>

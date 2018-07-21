@@ -39,12 +39,6 @@ profile;
       console.log(this.profile);
 }
   backToProfiles(){
-    if (this.role == 'USER') {
-      this.router.navigate(['profile']);
-    } else if(this.role == 'ADMIN'){
-      this.router.navigate(['admin/profiles']);
-    }else{
-      alert('Error!!!')
-    }
+    this.router.navigate(['/profiles']);
   }
 }

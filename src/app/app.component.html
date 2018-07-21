@@ -1,17 +1,27 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#"><h3>DEMO</h3></a>
+  <a class="navbar-brand" href="#">
+    <h3 style="color:#ff7524;font-family:fantasy">
+      <i class="fab fa-affiliatetheme"
+      style="padding: 8px; border-radius: 17px; background-color: #eae5e62b; box-shadow: 4px 3px;">
+      </i>
+      <span> Asterittech</span>
+    </h3>
+    </a>
   <div class="collapse navbar-collapse" id="navbarSupportedContent"
-  style="margin-left: 1100px;">
+  style="margin-left: 900px;">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active" *ngIf='role'>
-          <a class="nav-link" class="btn btn-primary btn-lg" style="font-size:15px">
-          <span class="glyphicon glyphicon-user"></span>{{role}}
+          <a class="nav-link" class="btn btn-primary btn-md" style="font-size:20px;color:white">
+            <i class="fas fa-user-tie" *ngIf="role == 'ADMIN'"></i>
+            <i class="fas fa-user" *ngIf="role == 'USER'"></i>
+             {{ role}}
         </a>
       </li>
-      <li class="nav-item active">
-          <a class="nav-link" (click)="loginCall()" ><h3>{{logInValue}}</h3></a>
+      <li class="nav-item active" style="cursor:pointer">
+          <a class="nav-link" (click)="loginCall()" ><h5>{{logInValue}}</h5></a>
       </li>
     </ul>
   </div>
 </nav>
-<router-outlet></router-outlet>
+<hr>
+<router-outlet style="margin-top:10px"></router-outlet>
