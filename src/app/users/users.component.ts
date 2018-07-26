@@ -43,6 +43,15 @@ update(index){
   } else {
     alert("Error!!");
   }
-
+}
+editUser(data){
+  this.service.editUser(data).subscribe(
+    data => {
+      alert("success");
+    },
+    error => {
+      alert("Error!!!");
+    }
+  )
 }
 }

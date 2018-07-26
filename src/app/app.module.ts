@@ -7,6 +7,7 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { CookieService } from 'ngx-cookie-service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MyOwnCustomMaterialModule} from './angularMaterial';
+import { DataFilter } from './customPipe';
 
 import { AppComponent } from './app.component';
 import { SignupComponent } from './signup/signup.component';
@@ -32,7 +33,8 @@ import { UsersComponent } from './users/users.component';
     LandingPageComponent,
     JobsComponent,
     UsersAdminPageComponent,
-    UsersComponent
+    UsersComponent,
+    DataFilter
   ],
   imports: [
     BrowserModule,

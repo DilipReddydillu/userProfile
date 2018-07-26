@@ -46,6 +46,14 @@ export class ServiceService {
       let url = 'http://localhost:8080/api/registerUser/false';
       return this.http.post(url, body, httpOptions);
   }
+
+  editUser(data) {
+      let body = JSON.stringify(data);
+      console.log(data)
+      let url = 'http://localhost:8080/api/editUser';
+      return this.http.post(url, body, httpOptions);
+  }
+
   loginUser(data) {
       let body = JSON.stringify(data);
       console.log(data)

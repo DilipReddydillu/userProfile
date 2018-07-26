@@ -3,7 +3,15 @@
   <!-- <button  type="button" name="button" class="btn btn-success btn-lg" (click)="addJob()">Add Job</button> -->
   <button  type="button" name="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#exampleModal">Add Job</button>
   <button  type="button" name="button" class="btn btn-primary btn-lg" routerLink="/profiles">View Profile</button>
-<hr>
+  <hr>
+  <div class="">
+    <div class="input-group input-group-lg">
+    <div class="input-group-prepend">
+      <span class="input-group-text" id="inputGroup-sizing-lg">Search Filter</span>
+    </div>
+    <input type="text" class="form-control" [(ngModel)]="userFilter" placeholder="Filter By Id and Date">
+  </div>
+</div><br>
   <div class="">
   <table class="table table-success table-hover">
   <thead>
@@ -11,20 +19,26 @@
       <th>#</th>
       <th>Job Id</th>
       <th>Technology</th>
+      <th>Experience</th>
       <th>Visa Type</th>
       <th>Job Description</th>
-      <th>comments</th>
+      <th>Comments</th>
+      <th>Created By</th>
+      <th>Date</th>
       <th></th>
     </tr>
   </thead>
   <tbody style="font-size: medium;">
-    <tr  *ngFor="let data of job; let i = index; let lastEl = last; let firstEl = first">
+    <tr  *ngFor="let data of job| filterData : userFilter: 'job'; let i = index; let lastEl = last; let firstEl = first">
       <td>{{i+1}}</td>
       <td>
         <input class="" type="text" [(ngModel)]='data.jobId'/>
       </td>
       <td>
         <input class="" type="text" [(ngModel)]='data.resourceTechnology'/>
+      </td>
+      <td>
+        <input class="" type="text" [(ngModel)]='data.resourceExp'/>
       </td>
       <td>
         <input class="" type="text" [(ngModel)]='data.resourceVisaType'/>
@@ -34,6 +48,12 @@
       </td>
       <td>
         <input class="" type="text" [(ngModel)]='data.comments'/>
+      </td>
+      <td>
+        <input class="" type="text" [(ngModel)]='data.createdBy'/>
+      </td>
+      <td>
+        <input class="" type="text" [(ngModel)]='data.date'/>
       </td>
       <td>
         <button type="button"  (click)='apply(data)' class="btn btn-success btn-md">Apply
@@ -56,34 +76,42 @@
     <div class="modal-content">
       <div class="modal-header">
         <h2 class="modal-title" id="exampleModalLabel" style="margin-left:160px">Add Job</h2>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="jobCreation.reset()">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-  <form>
+  <form name="jobCreation" #jobCreation="ngForm">
   <div class="form-group">
     <label for="tech">Technology</label>
-    <input type="text" name="tech" class="form-control" [(ngModel)]="newJob.resourceTechnology" id="tech"   placeholder="Enter Technoology">
+    <input type="text" required name="tech" class="form-control" [(ngModel)]="newJob.resourceTechnology" id="tech"   placeholder="Enter Technoology">
   </div>
   <div class="form-group">
     <label for="visa">Visa Type</label>
-    <input type="text" name="visa" class="form-control" [(ngModel)]="newJob.resourceVisaType" id="visa"  placeholder="Enter VisaType">
+    <input type="text" required name="visa" class="form-control" [(ngModel)]="newJob.resourceVisaType" id="visa"  placeholder="Enter VisaType">
+  </div>
+  <div class="form-group">
+    <label for="exp">Experience</label>
+    <input type="text" required name="exp" class="form-control" [(ngModel)]="newJob.resourceExp" id="exp"  placeholder="Enter Experience">
   </div>
   <div class="form-group">
     <label for="description">Job Description</label>
-    <input type="text" name="desc" class="form-control" [(ngModel)]="newJob.description" id="desc"  placeholder="Description">
+    <input type="text" required name="desc" class="form-control" [(ngModel)]="newJob.description" id="desc"  placeholder="Description">
+  </div>
+  <div class="form-group">
+    <label for="createdby">CreatedBy</label>
+    <input type="text" required name="createdby" class="form-control" [(ngModel)]="newJob.createdBy"   placeholder="CreatedBy">
   </div>
   <div class="form-group">
     <label for="comments">Comments</label>
-    <input type="text" name="comments" class="form-control" [(ngModel)]="newJob.comments" id="comments" placeholder="Comments">
+    <input type="text" required name="comments" class="form-control" [(ngModel)]="newJob.comments" id="comments" placeholder="Comments">
   </div>
-</form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" (click)="newJobData(newJob)"  data-dismiss="modal">Submit</button>
-      </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="jobCreation.reset()" data-dismiss="modal">Close</button>
+      <button type="button" class="btn btn-primary" [disabled]="!jobCreation.form.valid" (click)="newJobData(newJob)"  data-dismiss="modal">Submit</button>
+    </div>
+  </form>
+</div>
     </div>
   </div>
 </div>

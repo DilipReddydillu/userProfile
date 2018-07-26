@@ -3,9 +3,9 @@
   <div class="">
     <div class="input-group input-group-lg">
     <div class="input-group-prepend">
-      <span class="input-group-text" id="inputGroup-sizing-lg">Filter By Name</span>
+      <span class="input-group-text" id="inputGroup-sizing-lg">Search Filter</span>
     </div>
-    <input type="text" class="form-control" [(ngModel)]="userFilter" placeholder="Filter Value">
+    <input type="text" class="form-control" [(ngModel)]="userFilter" placeholder="Filter By Id, Name">
   </div>
 </div>
 <br>
@@ -13,6 +13,7 @@
          <table class="table table-bordered">
            <thead>
              <tr>
+               <th>Id</th>
                <th>Name</th>
                <th>Email</th>
                <th>Mobile</th>
@@ -20,12 +21,17 @@
              </tr>
            </thead>
            <tbody>
-             <tr *ngFor="let data of users | filter : userFilter; let i = index;">
+             <tr *ngFor="let data of users | filterData : userFilter : 'user'; let i = index;">
                <td>
-                 {{data.userName}}
+                 <span>{{data.userId}}</span>
                </td>
                <td>
-                 {{data.email}}
+                 <span ngIf="data.edit == true || data.edit == undefined">{{data.userName}}</span>
+                 <input ngIf="data.edit == false" type="text" [(ngModel)]="data.userName" name="" value="">
+               </td>
+               <td>
+                 <span ngIf="data.edit == true || data.edit == undefined">{{data.email}}</span>
+                 <input ngIf="data.edit == false" type="text" [(ngModel)]="data.email" name="" value="">
                </td>
                <td>
                  {{data.mobile}}
@@ -36,6 +42,10 @@
                   [checked]="data.blocked" [(ngModel)]="data.blocked"
                   [disabled]="val" (change)='update(i)'>
                 </mat-slide-toggle>
+              </td>
+              <td>
+                <button type="button" name="button" ngIf="data.edit == true || data.edit == undefined" (click)="data.edit = false">edit</button>
+                <button type="button" name="button" ngIf="data.edit == false" (click)="data.edit = true;editUser(data) ">save</button>
               </td>
              </tr>
            </tbody>
